@@ -1,4 +1,4 @@
-
+Report
 
 |--------+-------------------------------------------------------------------------------------------------------------------|
 | Sample | Species                                                                                                           |
@@ -9,6 +9,10 @@
 | BGS13  | BETA STREPTOCOCCUS GROUP B                                                                                        |
 | BGS16  | Escherichia coli (Amp, bactrim R), Pseudomonas aeruginosa                                                         |
 |--------+-------------------------------------------------------------------------------------------------------------------|
+
+
+
+Sample Reads
 
 |---------+------------------+--------------------------+-----------------------+-------------------------+------------------------+--------------------------+-----------------------+-----------------------------+--------------------------+----------------------------|
 |         | Escherichia_coli | Escherichia_unclassified | Klebsiella_pneumoniae | Klebsiella_unclassified | Pseudomonas_aeruginosa | Pseudomonas_unclassified | Staphylococcus_aureus | Staphylococcus_unclassified | Streptococcus_agalactiae | Streptococcus_unclassified |

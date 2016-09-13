@@ -16,10 +16,13 @@ tax_df['rank'] = [i.strip() for i in tax_df['rank']]
 def get_species_count(df, id, species_df, row_name, col_name):
     _t = df[df['tax_id'] == id]
     if not _t.empty:
+        species_df = species_df.fillna(0)
         val = 0
-        if row_name in species_df.index.values and col_name in species_df.columns.values:
-            val = species_df[col_name][row_name]
-        species_df = species_df.set_value(col_name, row_name, val + len(_t))
+        if col_name in species_df.index.values and row_name in species_df.columns.values:
+            val = species_df[row_name][col_name]
+        val += len(_t)
+        species_df = species_df.set_value(col_name, row_name, val)
+    return species_df
 
 def get_counts_df(path, species_df):
     df = pd.read_table(path, sep='\t', names=["classified", "id", "tax_id", "kmers", "text"])
@@ -28,17 +31,19 @@ def get_counts_df(path, species_df):
     print(name)
     for i in ids:
         col_name = tax_df.ix[i]['name'].replace(" ","_")
-        get_species_count(df, i, species_df, name, col_name)
+        species_df = get_species_count(df, i, species_df, name, col_name)
         parent_id = tax_df.ix[i]['parent_id']
         while tax_df.ix[parent_id]['rank'] != "genus":
             parent_id = tax_df.ix[parent_id]['parent_id']
         col_name = tax_df.ix[parent_id]['name'].replace(" ","_") + "_unclassified"
         if col_name not in species_df.columns.values:
-            get_species_count(df, parent_id, species_df, name, col_name)
+            species_df = get_species_count(df, parent_id, species_df, name, col_name)
         child = tax_df[tax_df['parent_id'] == i].index.values
         for _i in child:
             col_name = tax_df.ix[i]['name'].replace(" ","_")
-            get_species_count(df, _i, species_df, name, col_name)
+            species_df = get_species_count(df, _i, species_df, name, col_name)
+    print(species_df[name])
+    return species_df
 
 def format_df(df):
     for i in df.columns.values:
@@ -50,15 +55,15 @@ def plot_species(df):
     for i in range(0, len(cols), 2):
         print(cols[i])
         print(cols[i+1])
-        df[[cols[i], cols[i+1]]].plot()
+        df[[cols[i]]].plot()
         for tick in plt.gca().xaxis.get_major_ticks():
             sample_name = tick.label.get_text().split("_")[0]
             if cols[i].split("_")[0] in samples[sample_name]:                
-                tick.label1.set_color("red")
-                tick.label1.set_fontweight("bold")
+                tick.label.set_color("red")
+                tick.label.set_fontweight("bold")
         plt.xticks(rotation=90)
         plt.tight_layout()
-        plt.savefig("/Users/karthik/Documents/scripts/bacteremia/data/plots/species_genus/"+cols[i]+".png")
+        plt.savefig("/Users/karthik/Documents/bacteremia/data/plots/species/"+cols[i]+".png")
         plt.clf()
         
     
@@ -67,10 +72,11 @@ if __name__=="__main__":
     species_df = pd.DataFrame()
     for root, dirs, files in os.walk(folder):
         for f in files:
-            get_counts_df(root+f, species_df)
+            species_df = get_counts_df(root+f, species_df)
     species_df = species_df.transpose()
     species_df = species_df.sort_index(axis = 1)
     species_df.index = [i.split("_")[0] for i in species_df.index.values]
-    species_df.to_csv('/Users/karthik/Documents/scripts/bacteremia/data/species_plot.csv')
-    species_df = species_df.drop('Undetermined_S0_L001_R1_001.kraken.full.output')
+    species_df.to_csv('/Users/karthik/Documents/bacteremia/data/species_plot.csv')
+    species_df = species_df.drop('Undetermined')
     plot_species(species_df)
+    

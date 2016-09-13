@@ -1,0 +1,8 @@
+,Escherichia_coli,Escherichia_coli_children,Escherichia_unclassified,Klebsiella_pneumoniae,Klebsiella_pneumoniae_children,Klebsiella_unclassified,Pseudomonas_aeruginosa,Pseudomonas_aeruginosa_children,Pseudomonas_unclassified,Staphylococcus_aureus,Staphylococcus_aureus_children,Staphylococcus_unclassified,Streptococcus_agalactiae,Streptococcus_agalactiae_children,Streptococcus_unclassified
+BSG01_S1_L001_R1_001.kraken.full.output,1187.0,1.0,10.0,99.0,1.0,24.0,277.0,12.0,356.0,30.0,1.0,1265.0,2.0,3.0,369.0
+BSG03_S2_L001_R1_001.kraken.full.output,468.0,16.0,6.0,12.0,1.0,12.0,225.0,10.0,281.0,8.0,1.0,191.0,1.0,6.0,296.0
+BSG09_S3_L001_R1_001.kraken.full.output,5342.0,2.0,71.0,29.0,23.0,13.0,752.0,15.0,612.0,29.0,2.0,1439.0,6.0,29.0,1545.0
+BSG13_S4_L001_R1_001.kraken.full.output,250.0,1.0,2.0,10.0,,1.0,195.0,3.0,77.0,10.0,1.0,156.0,,1.0,142.0
+BSG16_S5_L001_R1_001.kraken.full.output,1023.0,1.0,6.0,28.0,1.0,3.0,515.0,2.0,816.0,28.0,1.0,585.0,,15.0,3028.0
+Negctrl_S6_L001_R1_001.kraken.full.output,2347.0,2.0,28.0,64.0,1.0,27.0,693.0,18.0,836.0,55.0,2.0,1287.0,2.0,4.0,676.0
+Undetermined_S0_L001_R1_001.kraken.full.output,669.0,1.0,7.0,20.0,1.0,4.0,208.0,1.0,156.0,12.0,3.0,279.0,1.0,4.0,331.0
